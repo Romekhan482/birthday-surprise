@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Happy Birthday Zaino ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Zaino ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#ffd1dc,#ffe6f2);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+width:320px;
+box-shadow:0 0 20px rgba(0,0,0,.2);
+}
+
+input{
+width:90%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:15px;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:10px;
+font-size:16px;
+}
+
+#surprise{
+display:none;
+margin-top:20px;
+}
+</style>
+
 </head>
-<body style="background:pink;text-align:center;font-family:Arial;">
-  <h1>🎂 Happy Birthday Zaino! 🎂</h1>
-  <h2>Made with ❤️ by Your Friend Romaisa</h2>
+
+<body>
+
+<div class="box">
+
+<h2>🔐 Birthday Surprise</h2>
+
+<p>Enter Password</p>
+
+<input type="password" id="pass">
+
+<br>
+
+<button onclick="checkPassword()">Open Surprise</button>
+
+<div id="surprise">
+
+<h1>🎂 Happy Birthday Zaino ❤️</h1>
+
+<p>
+From Your Friend Romaisa 🌸
+</p>
+
+</div>
+
+<script>
+
+function checkPassword(){
+
+var p=document.getElementById("pass").value;
+
+if(p=="OnlyAadil"){
+
+document.getElementById("surprise").style.display="block";
+
+}else{
+
+alert("Wrong Password ❤️");
+
+}
+
+}
+
+</script>
+
 </body>
-</html>
+
+</html>be 
