@@ -1,289 +1,314 @@
+
+
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Zainab! 🎂🌸</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Zaino! 🎉</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            text-align: center;
+        }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            position: relative;
+            z-index: 10;
+        }
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        h1 { font-size: 2rem; color: #ff007f; margin-bottom: 10px; }
+        p { font-size: 1rem; line-height: 1.5; }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-      color: #333;
-    }
+        input[type="password"] {
+            padding: 12px 20px;
+            width: 80%;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            margin-top: 15px;
+            text-align: center;
+        }
 
-    /* Floating Hearts Background Animation */
-    .heart {
-      position: fixed;
-      font-size: 24px;
-      animation: float 6s linear infinite;
-      bottom: -50px;
-      z-index: 1;
-      opacity: 0.7;
-    }
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #ff007f, #7928ca);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
 
-    @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-    }
+        button:hover { transform: scale(1.05); }
 
-    /* Card Container */
-    .container {
-      background: rgba(255, 255, 255, 0.92);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      width: 90%;
-      max-width: 500px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-      backdrop-filter: blur(8px);
-      margin: 20px 0;
-    }
+        #error-msg { color: #ff4d4d; font-size: 0.9rem; display: none; margin-top: 10px; }
+        #birthday-screen, #ending-screen { display: none; }
 
-    h1 {
-      font-family: 'Great Vibes', cursive;
-      color: #d63384;
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-    }
+        .wish-box {
+            min-height: 80px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
 
-    /* Password Screen Styling */
-    #password-screen input {
-      padding: 12px 18px;
-      width: 80%;
-      border: 2px solid #ff4b2b;
-      border-radius: 25px;
-      outline: none;
-      font-size: 16px;
-      text-align: center;
-      margin: 15px 0;
-    }
+        .cake-container { font-size: 4rem; cursor: pointer; margin: 15px 0; }
 
-    #password-screen button {
-      padding: 10px 30px;
-      background: #ff4b2b;
-      color: white;
-      border: none;
-      border-radius: 25px;
-      font-size: 16px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 10px rgba(255, 75, 43, 0.3);
-    }
+        .gifts { display: flex; justify-content: space-around; margin-top: 20px; }
+        .gift-box { font-size: 2.5rem; cursor: pointer; transition: 0.3s; }
+        .gift-box:hover { transform: scale(1.2); }
 
-    #password-screen button:hover {
-      background: #e03e22;
-      transform: scale(1.05);
-    }
+        .timer { font-size: 1.2rem; font-weight: bold; color: #00ffcc; margin-top: 15px; }
 
-    .error-msg {
-      color: #e60000;
-      font-size: 14px;
-      margin-top: 10px;
-      display: none;
-      font-weight: 600;
-    }
+        .floating-element {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2rem;
+            animation: floatUp linear infinite;
+            z-index: 1;
+        }
 
-    /* Main Surprise Content (Hidden initially) */
-    #main-content {
-      display: none;
-    }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
 
-    .profile-pic {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #ff4b2b;
-      margin: 15px auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .message-box {
-      background: #fff0f5;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px 0;
-      border-left: 5px solid #d63384;
-      text-align: left;
-      line-height: 1.7;
-      font-size: 15px;
-      white-space: pre-line;
-      color: #4a4a4a;
-    }
-
-    /* Song Container */
-    .song-box {
-      margin: 20px 0;
-      padding: 15px;
-      background: #ffe6eb;
-      border-radius: 15px;
-      border: 1px dashed #d63384;
-    }
-
-    .song-box iframe {
-      width: 100%;
-      height: 200px;
-      border-radius: 10px;
-      border: none;
-    }
-
-    /* Countdown Timer Layout */
-    .timer-container {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-    }
-
-    .time-box {
-      background: #d63384;
-      color: white;
-      padding: 10px 5px;
-      border-radius: 10px;
-      min-width: 65px;
-    }
-
-    .time-box span {
-      display: block;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .time-box label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-  </style>
+        /* Modal Style */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal-content {
+            background: #24243e;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 80%;
+            border: 1px solid #ff007f;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Floating Background Hearts -->
-  <div class="heart" style="left: 10%; animation-duration: 7s;">💖</div>
-  <div class="heart" style="left: 25%; animation-duration: 5s;">🌸</div>
-  <div class="heart" style="left: 45%; animation-duration: 8s;">✨</div>
-  <div class="heart" style="left: 65%; animation-duration: 6s;">💕</div>
-  <div class="heart" style="left: 85%; animation-duration: 9s;">🎈</div>
+    <audio id="bday-song" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-  <div class="container">
-    
-    <!-- 🔐 1. Password Lock Screen -->
-    <div id="password-screen">
-      <h1>A Special Surprise 🔐</h1>
-      <p style="color: #666; font-size: 14px;">Enter the secret password to open:</p>
-      <input type="password" id="passInput" placeholder="Password yahan likhein">
-      <br>
-      <button onclick="checkPassword()">Unlock ❤️</button>
-      <p id="errorMsg" class="error-msg">Ghalt Password! Dobara koshish karein.</p>
+    <!-- Login Screen -->
+    <div class="container" id="login-screen">
+        <h1>🔒 Secret Celebration</h1>
+        <p>Aapko yeh card kholne ke liye secret password chahiye!</p>
+        <input type="password" id="password-input" placeholder="Enter Password...">
+        <br>
+        <button onclick="checkPassword()">Unlock Birthday Magic ✨</button>
+        <p id="error-msg">Galat Password! Dubara koshish karein.</p>
     </div>
 
-    <!-- 🎉 2. Main Birthday Screen -->
-    <div id="main-content">
-      <h1>Happy Birthday Zainab! 🎂🌸</h1>
-      
-      <!-- Photo File Name: photo.jpg -->
-      <img src="photo.jpg" alt="Zainab" class="profile-pic">
+    <!-- Main Birthday Screen -->
+    <div class="container" id="birthday-screen">
+        <h1>🎂 Happy Birthday Zaino! 🎉</h1>
 
-      <!-- 💖 Emotional Message Area -->
-      <div class="message-box">
-🎂💖 Happy Birthday, My Dearest Zaino! 🌸✨
+        <div class="wish-box" id="wish-display">
+            Loading special wishes for you... ✨
+        </div>
 
-Assalam-o-Alaikum meri pyari Zaino! ❤️🤍
-Aaj ka din mere liye bhi utna hi khaas hai jitna tumhare liye, kyunki aaj meri sabse pyari dost ka birthday hai. 🥹🎉
+        <div class="cake-container" onclick="blowCandles()" id="cake">🎂</div>
+        <p id="cake-text" style="font-size: 0.9rem; color: #ff007f;">Tap the cake to blow out candles! 🕯️</p>
 
-🎂 Happy Birthday! 🎉✨
+        <p style="margin-top: 20px; font-weight: bold;">Tap a Gift to Open Your Surprise 🎁</p>
+        <div class="gifts">
+            <div class="gift-box" onclick="openGift(1)">🎁</div>
+            <div class="gift-box" onclick="openGift(2)">🎁</div>
+            <div class="gift-box" onclick="openGift(3)">🎁</div>
+        </div>
 
-Sabse pehle Allah se yehi dua karti hoon ke Allah tumhe hamesha sehat 🩺, khushiyan 😊, sukoon 🤍, lambi zindagi 🌹 aur har wo cheez ata kare jo tumhare dil mein hai. 💖 Allah tumhari har jaiz dua qubool kare 🤲 aur tumhari zindagi ko hamesha roshan rakhe. ✨ Ameen. 🤍🌸
-
-Zaino, shayad main lafzon mein kabhi poori tarah bayaan na kar sakun ke tum meri zindagi mein kitni important ho. ❤️ Humari dosti ko 5 saal ho gaye hain, aur in 5 saalon mein tum sirf meri dost nahi rahi, balki meri strength 💪, meri support 🤍 aur meri bohat achhi yaadon ka hissa ban gayi ho. 🌷
-
-Mere har mushkil waqt mein tumne mera saath diya. 🤝 Jab main udaas hoti thi 😔, tumne mujhe hansaya. 😊 Jab main pareshan hoti thi 💭, tumne meri baat suni. 🤍 Aur jab mujhe lagta tha ke shayad koi nahi samjhega, tab tum hamesha mere saath khari rahi. 🫂 Ye ehsaan main kabhi nahi bhool sakti. ❤️
-
-Sach kahun to tumhari dosti meri zindagi ki sabse khoobsurat cheezon mein se ek hai. 🌹 Har kisi ko itni sachchi aur caring dost nahi milti, aur main Allah ka shukr ada karti hoon 🤲 ke mujhe tum jaisi dost mili. 💕
-
-Meri dua hai ke chahe waqt kitna bhi badal jaye ⏳, humari dosti kabhi na badle. 🤍 In Sha Allah hum hamesha ek dusre ke saath rahenge 🤝, ek dusre ki khushiyon mein bhi 🎉 aur mushkil waqt mein bhi. 🌸
-
-Aaj tum muskurao 😊, khush raho 💖 aur apna din khoob enjoy karo 🎂🎈, kyunki aaj ka din sirf tumhara hai. 🥳🎊
-
-🎂 Happy Birthday once again, meri pyari Zaino! ❤️🌹
-Allah tumhe duniya ki har khushi 😊, har kamyabi 🌟 aur har muskurahat 😇 ata kare. Tumhari zindagi hamesha pyar ❤️, sukoon 🤍 aur barkat 🌸 se bhari rahe. Ameen. 🤲✨
-
-With lots of love 💖, prayers 🤲 and best wishes... 🌹
-❤️ Your Friend, Romaisa 🌸
-      </div>
-
-      <!-- 🎵 Special Song Section (Sunn Le Zara) -->
-      <div class="song-box">
-        <h4 style="color: #d63384; margin-bottom: 10px;">Play Birthday Song 🎵</h4>
-        <iframe src="https://www.youtube.com/embed/QlCyFYY1_jA?enablejsapi=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-
-      <!-- ⏳ Countdown Timer -->
-      <h3 style="color: #d63384; margin-top: 20px; font-size: 1.1rem;">Countdown to the Special Day ⏳</h3>
-      <div class="timer-container">
-        <div class="time-box"><span id="days">00</span><label>Days</label></div>
-        <div class="time-box"><span id="hours">00</span><label>Hours</label></div>
-        <div class="time-box"><span id="minutes">00</span><label>Mins</label></div>
-        <div class="time-box"><span id="seconds">00</span><label>Secs</label></div>
-      </div>
+        <div class="timer">
+            Celebration Time Left Today: <br>
+            <span id="hours">00</span>h : <span id="minutes">00</span>m : <span id="seconds">00</span>s
+        </div>
     </div>
 
-  </div>
+    <!-- Ending Screen -->
+    <div class="container" id="ending-screen">
+        <h1>✨ Hope You Liked It! ✨</h1>
+        <p>May your day be filled with lots of love, laughter, and happiness! ❤️</p>
+    </div>
 
-  <script>
-    // Password Check Function
-    function checkPassword() {
-      const input = document.getElementById('passInput').value;
-      // Secret Password Set
-      if (input === 'OnlyAadil') {
-        document.getElementById('password-screen').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-      } else {
-        document.getElementById('errorMsg').style.display = 'block';
-      }
-    }
+    <!-- Gift Popup Modal -->
+    <div class="modal" id="gift-modal">
+        <div class="modal-content">
+            <h3 id="modal-title" style="color: #ff007f;"></h3>
+            <p id="modal-msg"></p>
+            <button onclick="closeGift()">Close ✨</button>
+        </div>
+    </div>
 
-    // Countdown Timer Settings (Target Date)
-    const birthdayTarget = new Date('2026-08-15T00:00:00').getTime();
+    <script>
+        const song = document.getElementById('bday-song');
+        let animationInterval;
 
-    const timerInterval = setInterval(() => {
-      const now = new Date().getTime();
-      const diff = birthdayTarget - now;
+        const wishes = [
+            "Aapko saalgirah buhat buhat mubarak ho Zaino! 🥳 May all your dreams come true!",
+            "Wishing you a year full of happiness, success, and pure joy! ✨",
+            "Always stay happy and keep smiling! You deserve the absolute best today & always. 💖"
+        ];
+        let currentWish = 0;
 
-      if (diff < 0) {
-        clearInterval(timerInterval);
-        document.querySelector('.timer-container').innerHTML = "<h2 style='color:#d63384;'>🎉 Happy Birthday Zainab! 🎉</h2>";
-        return;
-      }
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            
+            // Password Set:
+            const myNewPassword = "Only Aadil can handle you"; 
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            if (input.trim() === myNewPassword) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('birthday-screen').style.display = 'block';
+                startCelebration();
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
 
-      document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-      document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-      document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-      document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-    }, 1000);
-  </script>
+        function startCelebration() {
+            song.play().catch(e => console.log("Autoplay blocked"));
+            rotateWishes();
+            setInterval(rotateWishes, 4000);
+            startTimer();
+
+            const fireworksInterval = setInterval(() => {
+                confetti({
+                    particleCount: 35,
+                    spread: 70,
+                    origin: { y: 0.7 }
+                });
+            }, 2000);
+
+            animationInterval = setInterval(() => {
+                createFloatingItem();
+            }, 300);
+
+            song.onended = function() {
+                clearInterval(fireworksInterval);
+                clearInterval(animationInterval);
+                
+                document.getElementById('birthday-screen').style.display = 'none';
+                document.getElementById('ending-screen').style.display = 'block';
+
+                confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
+            };
+        }
+
+        function rotateWishes() {
+            const display = document.getElementById('wish-display');
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerText = wishes[currentWish];
+                display.style.opacity = 1;
+                currentWish = (currentWish + 1) % wishes.length;
+            }, 300);
+        }
+
+        function blowCandles() {
+            const cake = document.getElementById('cake');
+            const cakeText = document.getElementById('cake-text');
+            cake.innerText = "🍰";
+            cakeText.innerText = "🎉 Wish Granted! Candles Blown Out! 🎉";
+            cakeText.style.color = "#00ffcc";
+
+            confetti({
+                particleCount: 100,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function openGift(num) {
+            const modal = document.getElementById('gift-modal');
+            const title = document.getElementById('modal-title');
+            const msg = document.getElementById('modal-msg');
+
+            if(num === 1) {
+                title.innerText = "🎁 Special Wish";
+                msg.innerText = "Romaisa ki taraf se: Aapki zindagi hamesha khushiyon se bhari rahe aur aap har maqsad mein kamyab hon! ✨";
+            } else if(num === 2) {
+                title.innerText = "⭐ Virtual Hug & Love";
+                msg.innerText = "Sending you the biggest birthday hug! Have the best day ever Zaino! 🤗💖";
+            } else {
+                title.innerText = "🎆 Unlimited Happiness";
+                msg.innerText = "May your smile remain bright forever! Happy Birthday! 🥳🎉";
+            }
+
+            modal.style.display = "flex";
+            confetti({ particleCount: 70, spread: 80, origin: { y: 0.5 } });
+        }
+
+        function closeGift() {
+            document.getElementById('gift-modal').style.display = "none";
+        }
+
+        function startTimer() {
+            function updateTimer() {
+                const now = new Date();
+                const currentHours = 23 - now.getHours();
+                const currentMins = 59 - now.getMinutes();
+                const currentSecs = 59 - now.getSeconds();
+
+                document.getElementById('hours').innerText = String(currentHours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(currentMins).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(currentSecs).padStart(2, '0');
+            }
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        function createFloatingItem() {
+            const items = ['🎈', '❤️', '✨', '💖', '🎉', '🌟', '🧁', '⭐'];
+            const item = document.createElement('div');
+            item.className = 'floating-element';
+            item.innerText = items[Math.floor(Math.random() * items.length)];
+            item.style.left = Math.random() * 90 + 5 + 'vw';
+            item.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, 6000);
+        }
+    </script>
 </body>
-        </html>
+</html>
 
