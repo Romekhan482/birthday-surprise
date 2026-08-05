@@ -1,312 +1,325 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Zaino! 🎉 - 6th August</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <title>Happy Birthday Zaino - 5 Years of Friendship</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            text-align: center;
+            min-height: 100vh;
+            padding: 10px;
         }
 
-        .container {
-            width: 90%;
-            max-width: 500px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            position: relative;
-            z-index: 10;
-        }
-
-        h1 { font-size: 2rem; color: #ff007f; margin-bottom: 5px; }
-        .date-badge {
-            background: #ff007f;
-            color: #fff;
-            padding: 4px 15px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        p { font-size: 1rem; line-height: 1.5; }
-
-        .profile-pic-container {
-            margin: 15px auto;
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 4px solid #ff007f;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
-        }
-
-        .profile-pic-container img {
+        /* Password Modal Styling */
+        .pass-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
         }
 
-        input[type="password"] {
-            padding: 12px 20px;
-            width: 80%;
-            border-radius: 25px;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-            margin-top: 15px;
+        .pass-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
             text-align: center;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
-        button {
-            padding: 12px 25px;
-            background: linear-gradient(45deg, #ff007f, #7928ca);
-            color: #fff;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: 0.3s;
+        .pass-box h3 {
+            color: #d81b60;
+            margin-bottom: 10px;
         }
 
-        button:hover { transform: scale(1.05); }
-
-        #error-msg { color: #ff4d4d; font-size: 0.9rem; display: none; margin-top: 10px; }
-        #birthday-screen, #ending-screen { display: none; }
-
-        .wish-box {
-            min-height: 80px;
+        .pass-box input {
+            width: 100%;
+            padding: 10px;
             margin: 15px 0;
+            border: 2px solid #f48fb1;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .pass-box button {
+            background: #d81b60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        /* Main Chat Container */
+        .chat-container {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+            position: relative;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #e91e63, #f48fb1);
+            color: white;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            font-size: 1.1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .chat-header h2 {
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+
+        .chat-header p {
+            font-size: 0.8rem;
+            opacity: 0.95;
+        }
+
+        /* Audio Player Bar */
+        .audio-player-box {
+            background: #fff0f6;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #f8bbd0;
+        }
+
+        .play-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
             justify-content: center;
-            transition: opacity 0.3s ease;
+            align-items: center;
         }
 
-        .cake-container { font-size: 4rem; cursor: pointer; margin: 10px 0; }
-
-        .gifts { display: flex; justify-content: space-around; margin-top: 20px; }
-        .gift-box { font-size: 2.5rem; cursor: pointer; transition: 0.3s; }
-        .gift-box:hover { transform: scale(1.2); }
-
-        .floating-element {
-            position: fixed;
-            bottom: -50px;
-            font-size: 2rem;
-            animation: floatUp linear infinite;
-            z-index: 1;
+        .song-info {
+            flex-grow: 1;
+            font-size: 0.85rem;
+            color: #880e4f;
+            font-weight: 600;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        /* Chat Messages Area */
+        .chat-box {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #fffafa;
         }
 
-        /* Modal Style */
+        .message {
+            max-width: 85%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: fadeIn 0.5s ease-in-out;
+            white-space: pre-line;
+        }
+
+        .received {
+            background: #f1f3f5;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .sent {
+            background: linear-gradient(135deg, #ec407a, #ab47bc);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .special-card {
+            background: linear-gradient(135deg, #ff80ab, #ff4081);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 5px 0;
+            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .surprise-btn {
+            background: #d81b60;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin: 10px 15px 15px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(216, 27, 96, 0.4);
+        }
+
+        /* Modal Overlay */
         .modal {
             display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
             z-index: 100;
+            backdrop-filter: blur(4px);
         }
+
         .modal-content {
-            background: #24243e;
-            padding: 25px;
-            border-radius: 15px;
-            max-width: 85%;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            width: 88%;
             max-height: 80vh;
             overflow-y: auto;
-            border: 1px solid #ff007f;
-            text-align: left;
+            animation: zoomIn 0.3s ease;
         }
+
+        .modal-content h2 {
+            color: #d81b60;
+            margin-bottom: 10px;
+        }
+
         .modal-content p {
-            white-space: pre-line;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            color: #444;
             line-height: 1.6;
+            text-align: left;
+            white-space: pre-line;
+        }
+
+        .close-btn {
+            background: #d81b60;
+            color: white;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Song: Sun Le Zara -->
-    <audio id="bday-song" loop preload="auto">
-        <source src="https://cdnsongs.com/music/data/Hindi/201402/1920/sun-le-zara.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Login Screen -->
-    <div class="container" id="login-screen">
-        <h1>🔒 Secret Celebration</h1>
-        <p>Aapko yeh card kholne ke liye secret password chahiye!</p>
-        <input type="password" id="password-input" placeholder="Enter Password...">
-        <br>
-        <button onclick="checkPassword()">Unlock Birthday Magic ✨</button>
-        <p id="error-msg">Galat Password! Dubara koshish karein.</p>
-    </div>
-
-    <!-- Main Birthday Screen -->
-    <div class="container" id="birthday-screen">
-        <h1>🎂 Happy Birthday Zaino! 🎉</h1>
-        <div class="date-badge">🗓️ 6th August Birthday Special</div>
-
-        <!-- Zaino Profile Picture -->
-        <div class="profile-pic-container">
-            <img src="https://via.placeholder.com/150/ff007f/ffffff?text=Zaino" alt="Zaino Photo" id="zaino-img">
-        </div>
-
-        <div class="wish-box" id="wish-display">
-            Loading special wishes for you... ✨
-        </div>
-
-        <div class="cake-container" onclick="blowCandles()" id="cake">🎂</div>
-        <p id="cake-text" style="font-size: 0.9rem; color: #ff007f;">Tap the cake to blow out candles! 🕯️</p>
-
-        <p style="margin-top: 20px; font-weight: bold;">Tap a Gift to Open Your Surprise 🎁</p>
-        <div class="gifts">
-            <div class="gift-box" onclick="openGift(1)">🎁</div>
-            <div class="gift-box" onclick="openGift(2)">🎁</div>
-            <div class="gift-box" onclick="openGift(3)">🎁</div>
+    <!-- Password Screen -->
+    <div class="pass-screen" id="passScreen">
+        <div class="pass-box">
+            <h3>🔒 Private Message</h3>
+            <p style="font-size: 0.85rem; color: #666;">Enter password to unlock Zaino's Surprise!</p>
+            <input type="password" id="passInput" placeholder="Enter Password">
+            <button onclick="checkPassword()">Unlock ✨</button>
+            <p id="errorMsg" style="color: red; font-size: 0.8rem; margin-top: 8px; display: none;">Galat password! Dobara try karein.</p>
         </div>
     </div>
 
-    <!-- Ending Screen -->
-    <div class="container" id="ending-screen">
-        <h1>✨ Hope You Liked It! ✨</h1>
-        <p>May your day be filled with lots of love, laughter, and happiness! ❤️</p>
-    </div>
+    <!-- Main Chat Window -->
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Happy Birthday Zaino! 🎂💖</h2>
+            <p>6 August - 5 Years of Friendship ✨</p>
+        </div>
 
-    <!-- Gift Popup Modal -->
-    <div class="modal" id="gift-modal">
-        <div class="modal-content">
-            <h3 id="modal-title" style="color: #ff007f; text-align: center;"></h3>
-            <p id="modal-msg"></p>
-            <div style="text-align: center; margin-top: 15px;">
-                <button onclick="closeGift()">Close ✨</button>
+        <!-- Song Player Bar with Sun Lai Zara Link -->
+        <div class="audio-player-box">
+            <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶</button>
+            <div class="song-info">
+                <span>Sun Lai Zara 🎵</span>
             </div>
+            <audio id="bgSong" loop preload="auto">
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
         </div>
-    </div>
 
-    <script>
-        const song = document.getElementById('bday-song');
-        let animationInterval;
-
-        const wishes = [
-            "Aapko saalgirah buhat buhat mubarak ho Zaino! 🥳 (6th August)",
-            "Celebrating 5 Years of Beautiful Friendship & Memories! ✨💖",
-            "Always stay happy and keep smiling! You deserve the absolute best today & always. 💖"
-        ];
-        let currentWish = 0;
-
-        function checkPassword() {
-            const input = document.getElementById('password-input').value;
-            const errorMsg = document.getElementById('error-msg');
+        <!-- Chat Area -->
+        <div class="chat-box" id="chatBox">
             
-            // Password Match:
-            const myNewPassword = "Only Aadil can handle you"; 
+            <div class="message received">
+                Assalam-o-Alaikum meri pyari Zaino! ❤️🤍
+                Aaj ka din mere liye bhi utna hi khaas hai jitna tumhare liye! 🥳🎉
+            </div>
 
-            if (input.trim() === myNewPassword) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('birthday-screen').style.display = 'block';
-                startCelebration();
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        }
+            <div class="special-card">
+                <h3>🎉 6 August Special 🎉</h3>
+                <p><b>5 Years of Pure Friendship</b></p>
+                <p style="font-size: 0.8rem; margin-top: 3px;">Romaisa & Zainab Forever 💖</p>
+            </div>
 
-        function startCelebration() {
-            // Password type karke button click karte hi song play hoga
-            song.play().catch(e => console.log("Autoplay blocked:", e));
-            rotateWishes();
-            setInterval(rotateWishes, 4000);
+            <!-- Full Personalized Birthday Message -->
+            <div class="message sent">
+🎂💖 Happy Birthday, My Dearest Zaino! 🌸✨
 
-            const fireworksInterval = setInterval(() => {
-                confetti({
-                    particleCount: 35,
-                    spread: 70,
-                    origin: { y: 0.7 }
-                });
-            }, 2000);
-
-            animationInterval = setInterval(() => {
-                createFloatingItem();
-            }, 300);
-
-            song.onended = function() {
-                clearInterval(fireworksInterval);
-                clearInterval(animationInterval);
-                
-                document.getElementById('birthday-screen').style.display = 'none';
-                document.getElementById('ending-screen').style.display = 'block';
-
-                confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
-            };
-        }
-
-        function rotateWishes() {
-            const display = document.getElementById('wish-display');
-            display.style.opacity = 0;
-            setTimeout(() => {
-                display.innerText = wishes[currentWish];
-                display.style.opacity = 1;
-                currentWish = (currentWish + 1) % wishes.length;
-            }, 300);
-        }
-
-        function blowCandles() {
-            const cake = document.getElementById('cake');
-            const cakeText = document.getElementById('cake-text');
-            cake.innerText = "🍰";
-            cakeText.innerText = "🎉 Wish Granted! Candles Blown Out! 🎉";
-            cakeText.style.color = "#00ffcc";
-
-            confetti({
-                particleCount: 100,
-                spread: 100,
-                origin: { y: 0.6 }
-            });
-        }
-
-        function openGift(num) {
-            const modal = document.getElementById('gift-modal');
-            const title = document.getElementById('modal-title');
-            const msg = document.getElementById('modal-msg');
-
-            if(num === 1) {
-                title.innerText = "🎂💖 Dearest Zaino! 🌸✨";
-                msg.innerText = `Assalam-o-Alaikum meri pyari Zaino! ❤️🤍
+Assalam-o-Alaikum meri pyari Zaino! ❤️🤍
 Aaj ka din mere liye bhi utna hi khaas hai jitna tumhare liye, kyunki aaj meri sabse pyari dost ka birthday hai. 🥹🎉
-🎂 Happy Birthday! 🎉✨
 
+🎂 Happy Birthday! 🎉✨
 Sabse pehle Allah se yehi dua karti hoon ke Allah tumhe hamesha sehat 🩺, khushiyan 😊, sukoon 🤍, lambi zindagi 🌹 aur har wo cheez ata kare jo tumhare dil mein hai. 💖 Allah tumhari har jaiz dua qubool kare 🤲 aur tumhari zindagi ko hamesha roshan rakhe. ✨ Ameen. 🤍🌸
 
 Zaino, shayad main lafzon mein kabhi poori tarah bayaan na kar sakun ke tum meri zindagi mein kitni important ho. ❤️ Humari dosti ko 5 saal ho gaye hain, aur in 5 saalon mein tum sirf meri dost nahi rahi, balki meri strength 💪, meri support 🤍 aur meri bohat achhi yaadon ka hissa ban gayi ho. 🌷
 
-Mere har mushkil waqt mein tumne mera saath diya. 🤝 Jab main udaas hoti thi 😔, tumne mujhe hansaya. 😊 Jab main pareshan hoti thi 💭, tumne meri baat suni. 🤍 Aur jab mujhe lagta tha ke shayad koi nahi samjhega, tab tum hamesha mere saath khari rahi. 🫂 Ye ehsaan main kabhi nahi bhool sakti. ❤️
+Mere har mushkil waqt mein tumne mera saath diya. 🤝 Jab main udaas hoti thi 😔, tumne mujhe hansaya. 😊 Jab main pareshan hoti thi 💭, tumne meri baat suni. 🤍 Aur jab mujhe lagta tha ke shayad koi nahi samjhega, tab tum hamesha mere saath khari rahi. 🫂 Ye ehsaan mein kabhi nahi bhool sakti. ❤️
 
 Sach kahun to tumhari dosti meri zindagi ki sabse khoobsurat cheezon mein se ek hai. 🌹 Har kisi ko itni sachchi aur caring dost nahi milti, aur main Allah ka shukr ada karti hoon 🤲 ke mujhe tum jaisi dost mili. 💕
 
@@ -318,37 +331,79 @@ Aaj tum muskurao 😊, khush raho 💖 aur apna din khoob enjoy karo 🎂🎈, k
 Allah tumhe duniya ki har khushi 😊, har kamyabi 🌟 aur har muskurahat 😇 ata kare. Tumhari zindagi hamesha pyar ❤️, sukoon 🤍 aur barkat 🌸 se bhari rahe. Ameen. 🤲✨
 
 With lots of love 💖, prayers 🤲 and best wishes... 🌹
-❤️ Your Friend, Romaisa 🌸`;
-            } else if(num === 2) {
-                title.innerText = "🌟 5 Years of Pure Friendship 🤝";
-                msg.innerText = "5 Saalon Ki Khoobsurat Yaadein! 💖\n\nIn 5 saal ki dosti mein humne kitni baatein ki, kitni memories banayein aur kitne mushkil waqt ek sath guzare. Thank you for being the most supportive friend Zaino! Happy 6th August Birthday! 🤗✨";
+❤️ Your Friend, Romaisa 🌸
+            </div>
+
+        </div>
+
+        <button class="surprise-btn" onclick="openSurprise()">✨ Click for Birthday Card! ✨</button>
+
+        <!-- Birthday Card Popup -->
+        <div class="modal" id="surpriseModal">
+            <div class="modal-content">
+                <h2>🎂 Dearest Zaino 🌸</h2>
+                <p>
+                Happy Birthday to the most amazing friend! 5 years of sharing smiles, tears, and unforgettable memories.
+
+                Thank you for being my strength, my support, and my best friend forever. May Allah bless you with endless joy, success, and health! 🤲✨
+                
+                With lots of love,
+                <b>Romaisa 💖</b>
+                </p>
+                <button class="close-btn" onclick="closeSurprise()">Close ❤️</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var song = document.getElementById("bgSong");
+        var btn = document.getElementById("playBtn");
+
+        // Password Verification & Auto Song Play on Unlock
+        function checkPassword() {
+            var passInput = document.getElementById("passInput").value;
+            
+            if (passInput === "Only Aadil can handle you") {
+                document.getElementById("passScreen").style.display = "none";
+                
+                // Song start code on correct password
+                song.muted = false;
+                song.play().then(() => {
+                    btn.innerText = "⏸";
+                }).catch((error) => {
+                    console.log("Autoplay restricted:", error);
+                    btn.innerText = "▶";
+                });
             } else {
-                title.innerText = "🎵 Dedicated Song & Wishes 🎆";
-                msg.innerText = "Playing 'Sun Le Zara' for you! 🎶\n\nMay your smile remain bright forever! Happy Birthday! 🥳🎉\n\nAlways stay blessed, stay happy, and stay as amazing as you are! ❤️";
+                document.getElementById("errorMsg").style.display = "block";
             }
-
-            modal.style.display = "flex";
-            confetti({ particleCount: 70, spread: 80, origin: { y: 0.5 } });
         }
 
-        function closeGift() {
-            document.getElementById('gift-modal').style.display = "none";
+        // Toggle Song Play/Pause Manually
+        function toggleAudio() {
+            if (song.paused) {
+                song.play();
+                btn.innerText = "⏸";
+            } else {
+                song.pause();
+                btn.innerText = "▶";
+            }
         }
 
-        function createFloatingItem() {
-            const items = ['🎈', '❤️', '✨', '💖', '🎉', '🌟', '🧁', '⭐'];
-            const item = document.createElement('div');
-            item.className = 'floating-element';
-            item.innerText = items[Math.floor(Math.random() * items.length)];
-            item.style.left = Math.random() * 90 + 5 + 'vw';
-            item.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.body.appendChild(item);
-
-            setTimeout(() => {
-                item.remove();
-            }, 6000);
+        // Popup Modal Functions
+        function openSurprise() {
+            document.getElementById("surpriseModal").style.display = "flex";
         }
+
+        function closeSurprise() {
+            document.getElementById("surpriseModal").style.display = "none";
+        }
+
+        // Auto Scroll Chat
+        var chatBox = document.getElementById("chatBox");
+        chatBox.scrollTop = chatBox.scrollHeight;
     </script>
+
 </body>
-    </html>
+            </html>
     
