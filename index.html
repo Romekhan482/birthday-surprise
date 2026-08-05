@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Zaino! 🎉</title>
+    <title>Happy Birthday Zaino! 🎉 - 6th August</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -34,8 +34,35 @@
             z-index: 10;
         }
 
-        h1 { font-size: 2rem; color: #ff007f; margin-bottom: 10px; }
+        h1 { font-size: 2rem; color: #ff007f; margin-bottom: 5px; }
+        .date-badge {
+            background: #ff007f;
+            color: #fff;
+            padding: 4px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
         p { font-size: 1rem; line-height: 1.5; }
+
+        .profile-pic-container {
+            margin: 15px auto;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid #ff007f;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+        }
+
+        .profile-pic-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         input[type="password"] {
             padding: 12px 20px;
@@ -68,7 +95,7 @@
 
         .wish-box {
             min-height: 80px;
-            margin: 20px 0;
+            margin: 15px 0;
             padding: 15px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 12px;
@@ -79,7 +106,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .cake-container { font-size: 4rem; cursor: pointer; margin: 15px 0; }
+        .cake-container { font-size: 4rem; cursor: pointer; margin: 10px 0; }
 
         .gifts { display: flex; justify-content: space-around; margin-top: 20px; }
         .gift-box { font-size: 2.5rem; cursor: pointer; transition: 0.3s; }
@@ -127,8 +154,9 @@
 </head>
 <body>
 
-    <audio id="bday-song" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <!-- Background Song: Sun Le Zara -->
+    <audio id="bday-song" loop preload="auto">
+        <source src="https://cdnsongs.com/music/data/Hindi/201402/1920/sun-le-zara.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Login Screen -->
@@ -144,6 +172,12 @@
     <!-- Main Birthday Screen -->
     <div class="container" id="birthday-screen">
         <h1>🎂 Happy Birthday Zaino! 🎉</h1>
+        <div class="date-badge">🗓️ 6th August Birthday Special</div>
+
+        <!-- Zaino Profile Picture -->
+        <div class="profile-pic-container">
+            <img src="https://via.placeholder.com/150/ff007f/ffffff?text=Zaino" alt="Zaino Photo" id="zaino-img">
+        </div>
 
         <div class="wish-box" id="wish-display">
             Loading special wishes for you... ✨
@@ -182,8 +216,8 @@
         let animationInterval;
 
         const wishes = [
-            "Aapko saalgirah buhat buhat mubarak ho Zaino! 🥳 May all your dreams come true!",
-            "Wishing you a year full of happiness, success, and pure joy! ✨",
+            "Aapko saalgirah buhat buhat mubarak ho Zaino! 🥳 (6th August)",
+            "Celebrating 5 Years of Beautiful Friendship & Memories! ✨💖",
             "Always stay happy and keep smiling! You deserve the absolute best today & always. 💖"
         ];
         let currentWish = 0;
@@ -192,7 +226,7 @@
             const input = document.getElementById('password-input').value;
             const errorMsg = document.getElementById('error-msg');
             
-            // Password Set:
+            // Password Match:
             const myNewPassword = "Only Aadil can handle you"; 
 
             if (input.trim() === myNewPassword) {
@@ -205,7 +239,8 @@
         }
 
         function startCelebration() {
-            song.play().catch(e => console.log("Autoplay blocked"));
+            // Password type karke button click karte hi song play hoga
+            song.play().catch(e => console.log("Autoplay blocked:", e));
             rotateWishes();
             setInterval(rotateWishes, 4000);
 
@@ -285,11 +320,11 @@ Allah tumhe duniya ki har khushi 😊, har kamyabi 🌟 aur har muskurahat 😇 
 With lots of love 💖, prayers 🤲 and best wishes... 🌹
 ❤️ Your Friend, Romaisa 🌸`;
             } else if(num === 2) {
-                title.innerText = "⭐ Virtual Hug & Love";
-                msg.innerText = "Sending you the biggest birthday hug! Have the best day ever Zaino! 🤗💖\n\nMay your year ahead be as bright and wonderful as your smile! ✨";
+                title.innerText = "🌟 5 Years of Pure Friendship 🤝";
+                msg.innerText = "5 Saalon Ki Khoobsurat Yaadein! 💖\n\nIn 5 saal ki dosti mein humne kitni baatein ki, kitni memories banayein aur kitne mushkil waqt ek sath guzare. Thank you for being the most supportive friend Zaino! Happy 6th August Birthday! 🤗✨";
             } else {
-                title.innerText = "🎆 Unlimited Happiness";
-                msg.innerText = "May your smile remain bright forever! Happy Birthday! 🥳🎉\n\nAlways stay blessed, stay happy, and stay as amazing as you are! ❤️";
+                title.innerText = "🎵 Dedicated Song & Wishes 🎆";
+                msg.innerText = "Playing 'Sun Le Zara' for you! 🎶\n\nMay your smile remain bright forever! Happy Birthday! 🥳🎉\n\nAlways stay blessed, stay happy, and stay as amazing as you are! ❤️";
             }
 
             modal.style.display = "flex";
@@ -315,6 +350,5 @@ With lots of love 💖, prayers 🤲 and best wishes... 🌹
         }
     </script>
 </body>
-</html>
-
+    </html>
     
