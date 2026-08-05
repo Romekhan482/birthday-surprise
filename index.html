@@ -103,7 +103,7 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             justify-content: center;
             align-items: center;
             z-index: 100;
@@ -112,8 +112,16 @@
             background: #24243e;
             padding: 25px;
             border-radius: 15px;
-            max-width: 80%;
+            max-width: 85%;
+            max-height: 80vh;
+            overflow-y: auto;
             border: 1px solid #ff007f;
+            text-align: left;
+        }
+        .modal-content p {
+            white-space: pre-line;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -161,9 +169,11 @@
     <!-- Gift Popup Modal -->
     <div class="modal" id="gift-modal">
         <div class="modal-content">
-            <h3 id="modal-title" style="color: #ff007f;"></h3>
+            <h3 id="modal-title" style="color: #ff007f; text-align: center;"></h3>
             <p id="modal-msg"></p>
-            <button onclick="closeGift()">Close ✨</button>
+            <div style="text-align: center; margin-top: 15px;">
+                <button onclick="closeGift()">Close ✨</button>
+            </div>
         </div>
     </div>
 
@@ -252,14 +262,34 @@
             const msg = document.getElementById('modal-msg');
 
             if(num === 1) {
-                title.innerText = "🎁 Special Wish";
-                msg.innerText = "Romaisa ki taraf se: Aapki zindagi hamesha khushiyon se bhari rahe aur aap har maqsad mein kamyab hon! ✨";
+                title.innerText = "🎂💖 Dearest Zaino! 🌸✨";
+                msg.innerText = `Assalam-o-Alaikum meri pyari Zaino! ❤️🤍
+Aaj ka din mere liye bhi utna hi khaas hai jitna tumhare liye, kyunki aaj meri sabse pyari dost ka birthday hai. 🥹🎉
+🎂 Happy Birthday! 🎉✨
+
+Sabse pehle Allah se yehi dua karti hoon ke Allah tumhe hamesha sehat 🩺, khushiyan 😊, sukoon 🤍, lambi zindagi 🌹 aur har wo cheez ata kare jo tumhare dil mein hai. 💖 Allah tumhari har jaiz dua qubool kare 🤲 aur tumhari zindagi ko hamesha roshan rakhe. ✨ Ameen. 🤍🌸
+
+Zaino, shayad main lafzon mein kabhi poori tarah bayaan na kar sakun ke tum meri zindagi mein kitni important ho. ❤️ Humari dosti ko 5 saal ho gaye hain, aur in 5 saalon mein tum sirf meri dost nahi rahi, balki meri strength 💪, meri support 🤍 aur meri bohat achhi yaadon ka hissa ban gayi ho. 🌷
+
+Mere har mushkil waqt mein tumne mera saath diya. 🤝 Jab main udaas hoti thi 😔, tumne mujhe hansaya. 😊 Jab main pareshan hoti thi 💭, tumne meri baat suni. 🤍 Aur jab mujhe lagta tha ke shayad koi nahi samjhega, tab tum hamesha mere saath khari rahi. 🫂 Ye ehsaan main kabhi nahi bhool sakti. ❤️
+
+Sach kahun to tumhari dosti meri zindagi ki sabse khoobsurat cheezon mein se ek hai. 🌹 Har kisi ko itni sachchi aur caring dost nahi milti, aur main Allah ka shukr ada karti hoon 🤲 ke mujhe tum jaisi dost mili. 💕
+
+Meri dua hai ke chahe waqt kitna bhi badal jaye ⏳, humari dosti kabhi na badle. 🤍 In Sha Allah hum hamesha ek dusre ke saath rahenge 🤝, ek dusre ki khushiyon mein bhi 🎉 aur mushkil waqt mein bhi. 🌸
+
+Aaj tum muskurao 😊, khush raho 💖 aur apna din khoob enjoy karo 🎂🎈, kyunki aaj ka din sirf tumhara hai. 🥳🎊
+
+🎂 Happy Birthday once again, meri pyari Zaino! ❤️🌹
+Allah tumhe duniya ki har khushi 😊, har kamyabi 🌟 aur har muskurahat 😇 ata kare. Tumhari zindagi hamesha pyar ❤️, sukoon 🤍 aur barkat 🌸 se bhari rahe. Ameen. 🤲✨
+
+With lots of love 💖, prayers 🤲 and best wishes... 🌹
+❤️ Your Friend, Romaisa 🌸`;
             } else if(num === 2) {
                 title.innerText = "⭐ Virtual Hug & Love";
-                msg.innerText = "Sending you the biggest birthday hug! Have the best day ever Zaino! 🤗💖";
+                msg.innerText = "Sending you the biggest birthday hug! Have the best day ever Zaino! 🤗💖\n\nMay your year ahead be as bright and wonderful as your smile! ✨";
             } else {
                 title.innerText = "🎆 Unlimited Happiness";
-                msg.innerText = "May your smile remain bright forever! Happy Birthday! 🥳🎉";
+                msg.innerText = "May your smile remain bright forever! Happy Birthday! 🥳🎉\n\nAlways stay blessed, stay happy, and stay as amazing as you are! ❤️";
             }
 
             modal.style.display = "flex";
@@ -285,5 +315,6 @@
         }
     </script>
 </body>
-    </html>
+</html>
+
     
