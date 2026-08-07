@@ -1,1 +1,271 @@
 birthday surprised new link
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Website - Rome Khan</title>
+    <!-- Confetti Library for Surprise Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #f7f1e3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: #fdfbf7;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 420px;
+            width: 90%;
+            z-index: 10;
+        }
+        .hidden { display: none !important; }
+        
+        /* Heart Screen */
+        .heart-btn {
+            font-size: 50px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            animation: pulse 1.2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Letter Screen */
+        .envelope {
+            font-size: 80px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .letter-content {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+            text-align: left;
+            max-height: 260px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .btn {
+            background-color: #d6a263;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .btn:hover { background-color: #c48e4d; }
+
+        /* Keypad */
+        .keypad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .key-btn {
+            padding: 12px;
+            font-size: 16px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .key-btn:hover { background: #f0f0f0; }
+        .passcode-display {
+            font-size: 22px;
+            letter-spacing: 5px;
+            margin: 15px 0;
+            color: #d6a263;
+            min-height: 30px;
+            font-weight: bold;
+        }
+        
+        /* Memories Grid */
+        .memories-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 0;
+            max-width: 100%;
+        }
+        .memory-card {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+        .memory-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Audio (Aap yahan apna song link ya file ka naam de sakti hain) -->
+    <audio id="birthdaySong" loop>
+        <source src="Dilo ki Muhabbat ko bandy q-song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Step 1: Heart Screen -->
+    <div id="screen-1" class="container">
+        <h3>A Letter, Just For You</h3>
+        <p>Tap the heart to open</p>
+        <button class="heart-btn" onclick="nextScreen(2)">❤️</button>
+    </div>
+
+    <!-- Step 2: Envelope Screen -->
+    <div id="screen-2" class="container hidden">
+        <h3>A Letter, Just For You</h3>
+        <p>Tap the envelope to unfold</p>
+        <div class="envelope" onclick="nextScreen(3)">✉️</div>
+        <p style="font-size: 12px; color: #888;">For You, My Special One</p>
+    </div>
+
+    <!-- Step 3: Letter Reading Screen -->
+    <div id="screen-3" class="container hidden">
+        <h3>Happy Birthday, Rome Khan! ✨</h3>
+        <p style="font-size: 11px; color: #888;">Just for you</p>
+        <div class="letter-content">
+            <p><b>Happiest birthday to you! 🥳🎂</b></p>
+            <p>May this year bring immense joy, success, and endless beautiful moments into your life. You truly deserve all the happiness in the world.</p>
+            <p>Keep shining, keep smiling, and never stop being the amazing person you are. Let's make this year unforgettable! ✨</p>
+            <p>Wishing you a day as gorgeous and special as your heart. 💖</p>
+        </div>
+        <button class="btn" onclick="nextScreen(4)">Next ➔</button>
+    </div>
+
+    <!-- Step 4: Lock/Passcode Screen (Password set to ROME) -->
+    <div id="screen-4" class="container hidden">
+        <div style="font-size: 40px;">🔒</div>
+        <h3>Enter Passcode To Unlock Memories</h3>
+        <p style="font-size: 12px; color: #666;">Type: R O M E</p>
+        <div class="passcode-display" id="passcodeText">_ _ _ _</div>
+        <div class="keypad-grid">
+            <button class="key-btn" onclick="pressKey('R')">R</button>
+            <button class="key-btn" onclick="pressKey('O')">O</button>
+            <button class="key-btn" onclick="pressKey('M')">M</button>
+            <button class="key-btn" onclick="pressKey('E')">E</button>
+            <button class="key-btn" onclick="pressKey('A')">A</button>
+            <button class="key-btn" onclick="pressKey('I')">I</button>
+            <button class="key-btn" onclick="clearKey()">C (Clear)</button>
+            <button class="key-btn" onclick="submitCode()" style="background: #d6a263; color: white;">Unlock ✓</button>
+        </div>
+    </div>
+
+    <!-- Step 5: Memories Unlocked Screen with Surprise & Song -->
+    <div id="screen-5" class="container hidden" style="max-width: 500px;">
+        <h3>✨ Special Memories Unlocked! ✨</h3>
+        <p>Here are some of your best moments...</p>
+        <div class="memories-container">
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb" alt="Memory">
+                <p style="font-size: 12px; margin: 5px 0;">Beautiful Moments</p>
+            </div>
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Memory">
+                <p style="font-size: 12px; margin: 5px 0;">Great Times</p>
+            </div>
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1" alt="Memory">
+                <p style="font-size: 12px; margin: 5px 0;">Unforgettable</p>
+            </div>
+        </div>
+        <button class="btn" onclick="location.reload()">Restart ↺</button>
+    </div>
+
+    <script>
+        let currentPasscode = "";
+        const correctCode = "ROME";
+
+        function nextScreen(screenNum) {
+            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+            document.getElementById('screen-' + screenNum).classList.remove('hidden');
+        }
+
+        function pressKey(char) {
+            if (currentPasscode.length < 4) {
+                currentPasscode += char;
+                updateDisplay();
+            }
+        }
+
+        function clearKey() {
+            currentPasscode = "";
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let displayStr = "";
+            for (let i = 0; i < 4; i++) {
+                displayStr += currentPasscode[i] ? currentPasscode[i] + " " : "_ ";
+            }
+            document.getElementById('passcodeText').innerText = displayStr.trim();
+        }
+
+        function submitCode() {
+            if (currentPasscode === correctCode) {
+                // 1. Play Song
+                let song = document.getElementById('birthdaySong');
+                song.play().catch(e => console.log("Audio play prevented:", e));
+                
+                // 2. Trigger Confetti Surprise Animation
+                triggerConfetti();
+
+                // 3. Go to Memories Screen
+                nextScreen(5);
+            } else {
+                alert("Ghalat code! Dobara try karein (Type: ROME).");
+                clearKey();
+            }
+        }
+
+        function triggerConfetti() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+              </html>
+              
