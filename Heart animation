@@ -1,0 +1,121 @@
+heart animation 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Animation with Music</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Center glowing core */
+        .core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: white;
+            box-shadow: 0 0 20px 10px #ff3399, 0 0 40px 20px #ff3399;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Lines simulating the turtle drawing effect */
+        .line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff3399, transparent);
+            transform-origin: left center;
+        }
+
+        /* Lines around center forming a heart */
+        .line:nth-child(1) { transform: rotate(0deg); width: 120px; }
+        .line:nth-child(2) { transform: rotate(20deg); width: 130px; }
+        .line:nth-child(3) { transform: rotate(40deg); width: 140px; }
+        .line:nth-child(4) { transform: rotate(60deg); width: 160px; }
+        .line:nth-child(5) { transform: rotate(80deg); width: 180px; }
+        .line:nth-child(6) { transform: rotate(100deg); width: 180px; }
+        .line:nth-child(7) { transform: rotate(120deg); width: 160px; }
+        .line:nth-child(8) { transform: rotate(140deg); width: 140px; }
+        .line:nth-child(9) { transform: rotate(160deg); width: 130px; }
+        .line:nth-child(10) { transform: rotate(180deg); width: 120px; }
+        .line:nth-child(11) { transform: rotate(200deg); width: 140px; }
+        .line:nth-child(12) { transform: rotate(220deg); width: 160px; }
+        .line:nth-child(13) { transform: rotate(240deg); width: 180px; }
+        .line:nth-child(14) { transform: rotate(260deg); width: 190px; }
+        .line:nth-child(15) { transform: rotate(280deg); width: 190px; }
+        .line:nth-child(16) { transform: rotate(300deg); width: 180px; }
+        .line:nth-child(17) { transform: rotate(320deg); width: 160px; }
+        .line:nth-child(18) { transform: rotate(340deg); width: 140px; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Audio controls styling */
+        audio {
+            margin-top: 20px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        audio:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-container">
+        <div class="core"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <!-- Audio Player: Isme apni song file ka naam/path "daayre.mp3" ki jagah daalein -->
+    <audio controls autoplay loop>
+        <source src="daayre.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+</body>
+</html>
